@@ -1,0 +1,74 @@
+
+@foreach ($projects as $project)
+    <h2>{{ $project->title }}</h2>
+    <p>Assigned Members:</p>
+    <ul>
+        @if ($project->assign_members != null)
+            @php
+                $assignedMemberIds = explode(',', $project->assign_members);
+                $assignedMembers = App\Models\Employee::whereIn('id', $assignedMemberIds)->pluck('name');
+            @endphp
+            @foreach ($assignedMembers as $member)
+                <li>{{ $member }}</li>
+            @endforeach
+        @else
+            <li>No assigned members</li>
+        @endif
+    </ul>
+@endforeach
+
+
+  @foreach ($projects as $project)
+        <div class="col-lg-4 col-md-6">
+            <div class="card card-block card-stretch card-height">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <div id="circle-progress-0{{$project->id}}"
+                            class="circle-progress-01 circle-progress circle-progress-primary"
+                            data-min-value="0" data-max-value="100" data-value="25" data-type="percent">
+                        </div>
+                        <i class="ri-star-fill m-0 text-warning"></i>
+                    </div>
+                    <h5 class="mb-1">{{$project->name}}</h5>
+                    <p class="mb-3">Preparing framework of block-based WordPress Theme.</p>
+                    <div class="d-flex align-items-center justify-content-between pt-3 border-top">
+                        @if ($project->assign_members != null)
+                            @php
+                                $assignedMemberIds = explode(',', $project->assign_members);
+                                $assignedMembers = App\Models\Employee::whereIn('id', $assignedMemberIds)->get();
+                            @endphp
+                            @foreach ($assignedMembers as $member)
+                                <div class="iq-media-group">
+                                    <a href="#" class="iq-media">
+                                        <img class="img-fluid avatar-40 rounded-circle" title="{{ $member->name }}"
+                                            src="{{ asset($member->pic) }}" alt="profile pic">
+                                    </a>
+                                </div>
+                            @endforeach
+                        @else
+                            <li>No assigned members</li>
+                        @endif
+                        <a class="btn btn-white text-primary link-shadow">{{$project->priority}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+    
+    <script>
+         $(".js-range-slider").ionRangeSlider({
+        type: "double",
+        min: 0,
+        max: 5000,
+        from: {{$priceMin}},
+        to: {{$priceMax}},
+        grid: true,
+        step:10,
+        prefix:"$",
+        skin : "round",
+        max_postfix: "+",
+        onFinish : function(){
+              apply_filters()
+            console.log(slider.result.to)
+        }
+    });
