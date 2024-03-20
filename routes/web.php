@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Attendance\AttendanceController;
+use App\Http\Controllers\Admin\Attendance\WorkFromHomePermissionController;
 use App\Http\Controllers\Admin\Employee\Attendance\AttendanceContoller;
 use App\Models\Employee;
 use App\Models\SubDepartment;
@@ -98,6 +99,9 @@ Route::prefix('admin')->middleware(['role:super-admin|admin'])->name('admin.')->
 
     Route::prefix('attendance')->name('attendance.')->controller(AttendanceController::class)->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::resource('permissions', WorkFromHomePermissionController::class);
+        Route::get('show/{id}', 'show')->name('show');
+
 
     });
 
@@ -202,7 +206,7 @@ Route::prefix('admin')->name('user.')->group(function () {
 });
 
 
-Route::prefix('employee')->middleware(['isEmployee'])->name('employee.')->group(function () {
+Route::prefix('employee')->middleware(['isEmployee','officeWifi'])->name('employee.')->group(function () {
 
     Route::prefix('ticket')->name('ticket.')->group(function () {
         Route::controller(TicketController::class)->group(function () {
@@ -236,6 +240,8 @@ Route::prefix('employee')->middleware(['isEmployee'])->name('employee.')->group(
         Route::get('/', 'index')->name('index');
         Route::post('checkin', 'checkin')->name('checkin');
         Route::post('checkout', 'checkout')->name('checkout');
+       
+
     });
 
 

@@ -37,6 +37,7 @@
                                     <th>Sub Department</th>
                                     <th> Position</th>
                                     <th>Pic</th>
+                                    <th>Attendance</th>
                                     <th>Action</th>
 
                                 </tr>
@@ -55,8 +56,9 @@
                                         <td><img src="{{ asset($Employee->pic) }}" alt="Profile Picture"
                                                 style="max-width: 100px; max-height: 100px;"></td>
 
-
+                                                <td><a href="{{route('admin.attendance.show',$Employee->id)}}">Attendace</a></td>
                                         <td>
+                                          
                                             <a href="{{ url('admin/Employee/edit', $Employee->id) }}" class="edit-icon"><i
                                                     class="fa-solid fa-pen-to-square"></i></a>
                                             <a href="{{ url('admin/Employee/destory', $Employee->id) }}"
@@ -76,6 +78,7 @@
                                     <th>Sub Department</th>
                                     <th>Position</th>
                                     <th>Pic</th>
+                                    <th>Attendance</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>

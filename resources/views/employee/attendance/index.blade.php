@@ -20,17 +20,17 @@
                     <h2>Check-in</h2>
                     <form action="{{ route('employee.checkin') }}" method="POST">
                         @csrf
-                        <label for="checkin_employee_id">Employee ID:</label>
-                        <input type="text" id="checkin_employee_id" name="employee_id" value="{{ Auth::user()->id }}" required readonly>
+                        <label hidden for="checkin_employee_id">Employee ID:</label>
+                        <input hidden type="text" id="checkin_employee_id" name="employee_id" value="{{ Auth::user()->id }}" required readonly>
                         <button type="submit">Check-in</button>
                     </form>
-                @elseif  (($attendance->attendance_status === 'present' || $attendance->attendance_status === 'late') && is_null($attendance->out_time))
+                @elseif  (($attendance->attendance_status === 'present' || $attendance->attendance_status === 'late' || $attendance->attendance_status === 'half_day')   && is_null($attendance->out_time))
                     {{-- Only show the "Check-out" button if the user is present or late --}}
                     <h2>Check-out</h2>
                     <form action="{{ route('employee.attendance.checkout') }}" method="POST">
                         @csrf
-                        <label for="checkout_employee_id">Employee ID:</label>
-                        <input type="text" id="checkout_employee_id" name="employee_id" value="{{ Auth::guard('employee')->user()->id }}" required readonly>
+                        <label hidden for="checkout_employee_id">Employee ID:</label>
+                        <input hidden type="text" id="checkout_employee_id" name="employee_id" value="{{ Auth::guard('employee')->user()->id }}" required readonly>
                         <button type="submit">Check-out</button>
                     </form>
                 @else
@@ -45,8 +45,8 @@
             <h2>Check-in</h2>
             <form action="{{ route('employee.attendance.checkin') }}" method="POST">
                 @csrf
-                <label for="checkin_employee_id">Employee ID:</label>
-                <input type="text" id="checkin_employee_id" name="employee_id" value="{{ Auth::guard('employee')->user()->id }}" required readonly>
+                <label hidden for="checkin_employee_id">Employee ID:</label>
+                <input hidden  type="text" id="checkin_employee_id" name="employee_id" value="{{ Auth::guard('employee')->user()->id }}" required readonly>
                
                 <button type="submit">Check-in</button>
             </form>

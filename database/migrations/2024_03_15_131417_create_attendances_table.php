@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->foreignId('uid')->references('id')->on('employees')->onDelete('cascade');
-            $table->time('in_time')->default(date("H:i:s"));
+            $table->time('in_time')->default(date("H:i:s"))->nullable();
             $table->time('out_time')->default(date("H:i:s"))->nullable();
             $table->time('total_work_time')->nullable();
             $table->enum('attendance_status', ['present', 'late', 'half_day', 'early_out', 'absent'])->default('absent');

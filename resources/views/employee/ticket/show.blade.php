@@ -4,8 +4,8 @@
     <li>ID: {{ $ticket->id }}</li>
     <li>Employee ID: {{ $ticket->employee_id }}</li>
     <li>Employee Name: {{ $ticket->employee->name }}</li> 
-    <td>{{ $ticket->department->name }}</td>
-    <td>{{ $ticket->subDepartment->name }}</td>
+    <li>department name :{{ $ticket->department->name }}</li>
+    <li> sub department name :{{ $ticket->subDepartment->name  ?? 'N/A'}}</li>
     <li>Client Name: {{ $ticket->client_name }}</li>
     <li>Client Email: {{ $ticket->client_email }}</li>
     <li>Client Phone: {{ $ticket->client_phone }}</li>

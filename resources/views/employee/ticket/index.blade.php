@@ -79,14 +79,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     @foreach ($tickets as $ticket)
                                         <tr>
                                             <td>{{ $ticket->id }}</td>
                                             <td>{{ $ticket->client->first_name }} {{ $ticket->client->last_name }}</td>
                                             <td>{{ $ticket->subject }}</td>
                                             <td>{{ $ticket->department->name }}</td>
-                                            <td>{{ $ticket->subDepartment->name }}</td>
+                                            <td>{{ $ticket->subDepartment->name ?? 'N/A' }}</td>
                                             <td>{{ $ticket->description }}</td>
                                             <td>{{ $ticket->priority }}</td>
                                             <td>{{ $ticket->price }}</td>

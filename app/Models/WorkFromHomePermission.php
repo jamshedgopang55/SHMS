@@ -5,23 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Attendance extends Model
+class WorkFromHomePermission extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'uid', 
-        'user_ip',
-        'in_time',
-        'out_time',
-        'total_work_time',
-        'attendance_status',
+        'employee_id',
         'date',
     ];
 
-  
     public function employee()
     {
-        return $this->belongsTo(Employee::class, 'uid');
+        return $this->belongsTo(Employee::class);
     }
-    
+
 }

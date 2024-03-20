@@ -19,7 +19,14 @@
         </div>
     </div>
 
-  
+    <p>Total Office Days: {{ $totalOfficeDays }}</p>
+    <p>Present Days: {{ $presentDays }}</p>
+    <p>On Time Count: {{ $onTimeCount }}</p>
+    <p>Late Count: {{ $lateCount }}</p>
+    <p>Early Out Count: {{ $earlyOutCount }}</p>
+    <p>Half Day Count: {{ $halfDayCount }}</p>
+    <p>Absent Count: {{ $totalOfficeDays - $presentDays  - $halfDayCount  }}</p>
+
 
     <div class="row">
         <div class="col-sm-12">
@@ -41,6 +48,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                                 @foreach ($attendances as $attendance)
                                 <tr>
                                     <td>{{ \Carbon\Carbon::parse($attendance->date)->format('l, d-M-Y') }}</td>
@@ -63,7 +71,10 @@
                                         <td style="color: green;">{{ ucfirst($attendance->attendance_status) }}</td> <!-- If attendance status is neither absent nor holiday, it will show the status in green -->
                                     @endif
                                 </tr>
-                            @endforeach
+                            @endforeach 
+                            
+                            
+
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -78,7 +89,6 @@
                             </tfoot>
                         </table>
                     </div>
-                    
                 </div>
             </div>
         </div>
