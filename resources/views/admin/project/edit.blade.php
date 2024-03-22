@@ -65,7 +65,9 @@
                                     <option value="high" {{ $project->priority == 'high' ? 'selected' : '' }}>High</option>
                                 </select>
                             </div>
+                            @can('update workFromHomePermission')
                             <button type="submit" class="btn btn-primary">Update Project</button>
+                            @endcan
                         </form>
                         
                     </div>

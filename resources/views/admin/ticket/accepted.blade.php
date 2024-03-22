@@ -63,9 +63,9 @@
                                     <tr class="ligth">
 
                                         <th scope="col">id</th>
+                                        <th scope="col">employee name</th>
                                         <th scope="col">Client name</th>
-                                        <th scope="col">Client phone</th>
-                                        <th scope="col">Client email</th>
+                                       
                                         <th scope="col">Subject</th>
                                         <th scope="col">Department </th>
                                         <th scope="col">Sub Department </th>
@@ -82,9 +82,8 @@
                                     @foreach ($tickets as $ticket)
                                         <tr>
                                             <td>{{ $ticket->id }}</td>
-                                            <td>{{ $ticket->client_name }}</td>
-                                            <td>{{ $ticket->client_phone }}</td>
-                                            <td>{{ $ticket->client_email }}</td>
+                                            <td>{{$ticket->employee->name }}</td>
+                                            <td>{{ $ticket->client->first_name }}</td>
                                             <td>{{ $ticket->subject }}</td>
                                             <td>{{ $ticket->department->name }}</td>
                                             <td>{{ $ticket->subDepartment->name ?? 'N/A'}}</td>
@@ -137,9 +136,8 @@
                                 <tfoot>
                                     <tr>
                                         <th scope="col">id</th>
+                                        <th scope="col">employee name</th>
                                         <th scope="col">Client name</th>
-                                        <th scope="col">Client phone</th>
-                                        <th scope="col">Client email</th>
                                         <th scope="col">Subject</th>
                                         <th scope="col">Department </th>
                                         <th scope="col">Sub Department </th>

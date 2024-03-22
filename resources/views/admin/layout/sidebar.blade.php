@@ -22,6 +22,7 @@
                         <span class="ml-4">Dashboards</span>
                     </a>
                 </li>
+
                 <li class="">
                     <a href="{{ route('admin.project.index') }}" class="svg-icon">
                         <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
@@ -35,19 +36,7 @@
                         <span class="ml-4">Projects</span>
                     </a>
                 </li>
-                <li class="">
-                    <a href="../backend/page-task.html" class="svg-icon">
-                        <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2">
-                            </path>
-                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1">
-                            </rect>
-                        </svg>
-                        <span class="ml-4">Task</span>
-                    </a>
-                </li>
+
                 <li class="">
                     <a href="{{ route('admin.Employee.index') }}" class="svg-icon">
                         <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
@@ -73,8 +62,26 @@
                         <span class="ml-4">Tickets</span>
                     </a>
                 </li>
+                @can('view attendance')
+                    <li class="">
+                        <a href="{{ route('admin.attendance.index') }}" class="svg-icon">
+                            <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2">
+                                </rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <span class="ml-4">Attendance</span>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('create workFromHomePermission')
                 <li class="">
-                    <a href="../backend/page-calender.html" class="svg-icon">
+                    <a href="{{ route('admin.attendance.permissions.index') }}" class="svg-icon">
                         <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round">
@@ -84,32 +91,13 @@
                             <line x1="8" y1="2" x2="8" y2="6"></line>
                             <line x1="3" y1="10" x2="21" y2="10"></line>
                         </svg>
-                        <span class="ml-4">Calender</span>
+                        <span class="ml-4">Work From Home</span>
                     </a>
                 </li>
-                <li class=" ">
-                    <a href="#otherpage" class="collapsed" data-toggle="collapse" aria-expanded="false">
-                        <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
-                            </path>
-                        </svg>
-                        <span class="ml-4">other page</span>
-                        <i class="las la-angle-right iq-arrow-right arrow-active"></i>
-                        <i class="las la-angle-down iq-arrow-right arrow-hover"></i>
-                    </a>
-                    <ul id="otherpage" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                        <li class=" ">
-                            <a href="#user" class="collapsed" data-toggle="collapse" aria-expanded="false">
+            @endcan
 
 
-                            </a>
 
-                        </li>
-
-                    </ul>
-                </li>
             </ul>
         </nav>
         @php
@@ -124,7 +112,7 @@
             }
         @endphp
 
-        
+
 
         <div id="sidebar-bottom" class="position-relative sidebar-bottom">
             <div class="card border-none mb-0 shadow-none">

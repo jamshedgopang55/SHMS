@@ -101,8 +101,6 @@ Route::prefix('admin')->middleware(['role:super-admin|admin'])->name('admin.')->
         Route::get('/', 'index')->name('index');
         Route::resource('permissions', WorkFromHomePermissionController::class);
         Route::get('show/{id}', 'show')->name('show');
-
-
     });
 
 
@@ -206,7 +204,7 @@ Route::prefix('admin')->name('user.')->group(function () {
 });
 
 
-Route::prefix('employee')->middleware(['isEmployee','officeWifi'])->name('employee.')->group(function () {
+Route::prefix('employee')->middleware(['isEmployee', 'officeWifi'])->name('employee.')->group(function () {
 
     Route::prefix('ticket')->name('ticket.')->group(function () {
         Route::controller(TicketController::class)->group(function () {
@@ -240,8 +238,6 @@ Route::prefix('employee')->middleware(['isEmployee','officeWifi'])->name('employ
         Route::get('/', 'index')->name('index');
         Route::post('checkin', 'checkin')->name('checkin');
         Route::post('checkout', 'checkout')->name('checkout');
-       
-
     });
 
 
@@ -257,7 +253,7 @@ Route::prefix('employee')->middleware(['isEmployee','officeWifi'])->name('employ
 Route::prefix('employee')->name('employee.')->group(function () {
     Route::controller(EmployeeIndexController::class)->group(function () {
         Route::get('login', 'login')->name('login')->middleware('RedirectIfEmployeeAuthenticated');
-        Route::post('authenticate', 'authenticate')->name('authenticate');
+            Route::post('authenticate', 'authenticate')->name('authenticate');
     });
 });
 

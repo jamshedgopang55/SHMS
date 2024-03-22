@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('mark:absent-employees')->dailyAt('09:19');
+        $schedule->command('mark:absent-employees')->dailyAt('00:00');
     }
 
     /**

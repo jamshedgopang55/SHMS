@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Models\SubDepartment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
 class indexController extends Controller
@@ -42,7 +43,7 @@ class indexController extends Controller
     
         if(Auth::guard('employee')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))){
             Auth::logout();
-            return  view('employee.dashboard');
+            return  Redirect()->route('employee.index');
           
         } else {
             return redirect()->route('employee.login')->with('error' ,'Invalid Email Or Password');

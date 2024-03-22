@@ -13,7 +13,7 @@ class AttendanceController extends Controller
 {
     public function index()
     {
-        $attendances = Attendance::get();
+        $attendances = Attendance::latest()->get();
 
         return view('admin.attendance.index', compact('attendances'));
     }

@@ -9,6 +9,16 @@ use App\Models\WorkFromHomePermission;
 
 class WorkFromHomePermissionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:view workFromHomePermission', ['only' => ['index']]);
+        $this->middleware('permission:create workFromHomePermission', ['only' => ['create','store']]);
+        $this->middleware('permission:update workFromHomePermission', ['only' => ['update','edit']]);
+        $this->middleware('permission:delete workFromHomePermission', ['only' => ['destroy']]);
+    }
+   
+
     public function index()
     {
         $permissions = WorkFromHomePermission::with('employee')->get();

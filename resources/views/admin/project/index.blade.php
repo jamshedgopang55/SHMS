@@ -95,7 +95,10 @@
                         @else
                             <li>No assigned members</li>
                         @endif
-                    <a href="{{route('admin.project.edit',$project->id)}}">Edit</a>
+                       
+                        <a href="{{route('admin.project.edit',$project->id)}}">View Or Edit</a>
+
+                        
                         <a style="text-transform: capitalize" class="btn btn-white text-primary link-shadow">{{$project->priority}}</a>
                     </div>
                 </div>
