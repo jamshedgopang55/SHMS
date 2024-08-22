@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\client;
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\client;
 use App\Models\Project;
 use App\Models\Employee;
+use App\Models\Milestone;
 use Illuminate\Http\Request;
 
 class dashboardController extends Controller
@@ -20,6 +21,14 @@ class dashboardController extends Controller
         $employeeCount = Employee::count();
         $clients = client::count();
 
+        $currentYear = Carbon::now()->year;
+        $currentMonth = Carbon::now()->month;
+
+        // Sum of price for milestones in the current year
+        $yearlyReceivedMilestonePrice = Milestone::whereYear('created_at', $currentYear)->sum('price');
+
+        $monthlyMilestonePrices = Milestone::whereMonth('created_at', $currentMonth)->sum('price');
+        // return $monthlyMilestonePrices;
         //Projects
         $projects = Project::where('progress', '<', 100)->latest()->take(3)->get();
 
@@ -70,6 +79,8 @@ class dashboardController extends Controller
         return view('admin.dashboard', compact(
             'projects',
             'userCount',
+            'monthlyMilestonePrices',
+            'yearlyReceivedMilestonePrice',
             'employeeCount',
             'monthlySalesRevenue',
             'yearlyTotalRevenue',

@@ -1,8 +1,8 @@
 <div class="iq-sidebar  sidebar-default ">
-    <div class="iq-sidebar-logo d-flex align-items-center">
+    <div class="iq-sidebar-logo d-flex align-items-center justify-content-center">
         <a href="../backend/index.html" class="header-logo">
-            <img src="/assets/images/logo.svg" alt="logo">
-            <h3 class="logo-title light-logo">Webkit</h3>
+            <img style="height:50px !important" src="/assets/images/logo.png" alt="logo">
+            <!--<h3 class="logo-title light-logo">Webkit</h3>-->
         </a>
         <div class="iq-menu-bt-sidebar ml-0">
             <i class="las la-bars wrapper-menu"></i>
@@ -11,7 +11,7 @@
     <div class="data-scrollbar" data-scroll="1">
         <nav class="iq-sidebar-menu">
             <ul id="iq-sidebar-toggle" class="iq-menu">
-                <li class="">
+                <li class="{{ request()->routeIs('admin.index') ? 'active' : '' }}">
                     <a href="{{ route('admin.index') }}" class="svg-icon">
                         <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -23,7 +23,8 @@
                     </a>
                 </li>
 
-                <li class="">
+                <li
+                    class="{{ request()->routeIs('admin.project.index', 'admin.project.create', 'admin.project.edit') ? 'active' : '' }}">
                     <a href="{{ route('admin.project.index') }}" class="svg-icon">
                         <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -37,7 +38,8 @@
                     </a>
                 </li>
 
-                <li class="">
+                <li
+                    class="{{ request()->routeIs('admin.Employee.index', 'admin.Employee.create', 'admin.Employee.edit') ? 'active' : '' }}">
                     <a href="{{ route('admin.Employee.index') }}" class="svg-icon">
                         <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -48,7 +50,22 @@
                         <span class="ml-4">Employees</span>
                     </a>
                 </li>
-                <li class="">
+
+                <li
+                    class="{{ request()->routeIs('admin.user.index', 'admin.user.create', 'admin.user.edit') ? 'active' : '' }}">
+                    <a href="{{ route('admin.user.index') }}" class="svg-icon">
+                        <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span class="ml-4">Admin</span>
+                    </a>
+                </li>
+
+                <li
+                    class="{{ request()->routeIs('admin.ticket.index', 'admin.ticket.accept', 'admin.ticket.reject') ? 'active' : '' }}">
                     <a href="{{ route('admin.ticket.index') }}" class="svg-icon">
                         <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -63,7 +80,7 @@
                     </a>
                 </li>
                 @can('view attendance')
-                    <li class="">
+                    <li class="{{ request()->routeIs('admin.attendance.index') ? 'active' : '' }}">
                         <a href="{{ route('admin.attendance.index') }}" class="svg-icon">
                             <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -74,14 +91,13 @@
                                 <line x1="8" y1="2" x2="8" y2="6"></line>
                                 <line x1="3" y1="10" x2="21" y2="10"></line>
                             </svg>
-                            <span class="ml-4">Attendance</span>
+                            <span class="ml-4">Attendance (EMP)</span>
                         </a>
                     </li>
                 @endcan
 
-                @can('create workFromHomePermission')
-                <li class="">
-                    <a href="{{ route('admin.attendance.permissions.index') }}" class="svg-icon">
+                <li class="{{ request()->routeIs('admin.UsersAttendance.list') ? 'active' : '' }}">
+                    <a href="{{ route('admin.UsersAttendance.list') }}" class="svg-icon">
                         <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round">
@@ -91,10 +107,120 @@
                             <line x1="8" y1="2" x2="8" y2="6"></line>
                             <line x1="3" y1="10" x2="21" y2="10"></line>
                         </svg>
-                        <span class="ml-4">Work From Home</span>
+                        <span class="ml-4">Attendance (ADM)</span>
                     </a>
                 </li>
-            @endcan
+
+
+                @can('create workFromHomePermission')
+                    <li
+                        class="{{ request()->routeIs('admin.attendance.permissions.index', 'admin.attendance.permissions.create', 'admin.attendance.permissions.edit') ? 'active' : '' }}">
+                        <a href="{{ route('admin.attendance.permissions.index') }}" class="svg-icon">
+                            <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2">
+                                </rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <span class="ml-4">Work From Home</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('view permission')
+                    <li
+                        class="{{ request()->routeIs('admin.car.index', 'admin.car.create', 'admin.carType.edit') ? 'active' : '' }}">
+                        <a href="{{ route('admin.Permission.index') }}" class="svg-icon">
+                            <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2">
+                                </rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <span class="ml-4">Permissions</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('view role')
+                    <li
+                        class="{{ request()->routeIs('admin.roles.index', 'admin.roles.create', 'admin.roles.edit') ? 'active' : '' }}">
+                        <a href="{{ route('admin.roles.index') }}" class="svg-icon">
+                            <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2">
+                                </rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <span class="ml-4">Roles</span>
+                        </a>
+                    </li>
+                @endcan
+                 @can('view deparment')
+                <li
+                    class="{{ request()->routeIs('admin.department.index', 'admin.department.create', 'admin.department.edit') ? 'active' : '' }}">
+                    <a href="{{ route('admin.department.index') }}" class="svg-icon">
+                        <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2">
+                            </rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        <span class="ml-4">Departments</span>
+                    </a>
+                </li>
+                @endcan
+
+               @can('view subdepartment')
+                <li class="{{ request()->routeIs('admin.subdepartment.index','admin.subdepartment.create','admin.subdepartment.edit') ? 'active' : '' }}">
+                    <a href="{{ route('admin.subdepartment.index') }}" class="svg-icon">
+                        <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2">
+                            </rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        <span class="ml-4">Sub Departments</span>
+                    </a>
+                </li>
+             @endcan 
+
+                {{-- @can('view department') --}}
+                <li
+                    class="{{ request()->routeIs('admin.schedules.index', 'admin.schedules.create', 'admin.schedules.edit') ? 'active' : '' }}">
+                    <a href="{{ route('admin.schedules.index') }}" class="svg-icon">
+                        <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2">
+                            </rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        <span class="ml-4">Schedules</span>
+                    </a>
+                </li>
+                {{-- @endcan --}}
+
+
+
+
+
+
 
 
 

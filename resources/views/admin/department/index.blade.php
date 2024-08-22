@@ -1,89 +1,89 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <title>Title</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
 
-        <!-- Bootstrap CSS v5.2.1 -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous"
-        />
-    </head>
 
-    <body class="text-center">
-   
+@extends('admin.layout.app')
+@section('content')
+    <div class="row">
+        <div class="col-lg-12">
+            @if (session('status'))
+            <div class="alert alert-success">{{ session('status') }}</div>
+             @endif
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between breadcrumb-content">
+                        <h5>Departments</h5>
+                        <div class="d-flex align-items-center">
+                            {{-- @can('create workFromHomePermission') --}}
+                            <div class="pl-3 border-left btn-new">
+                                <a href="{{route('admin.department.create')}}" class="btn btn-primary">Create New Department
+                                    </a>
+                            </div>
+                            {{-- @endcan --}}
 
-        <div
-            class="table-responsive"
-        >
-            <h1 class="mt-5">Departments</h1>
-            <div class="m-3" style="text-align:right">
-                <a href="{{route('admin.department.create')}}"  class="btn text btn-primary">Create New department</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <table
-                class="table table-primary"
-            >
-                <thead>
-                    <tr>
-                        <th scope="col">department_id</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($data as $department)
-                    
-                    <tr class="">
-                        <td scope="row">{{$department->id}}</td>
-                        <td>{{$department->name}}</td>
-                        <td>
-                            @can('update deparment')
-                            <a href="{{route('admin.department.edit',['id'=> $department->id])}}" class="btn btn-warning">
-                                Edit
-                            </a>
-                            @endcan
-                            @can('delete deparment')
-                            <form action="{{route('admin.department.destroy')}}" method="POST">
-                                <input hidden type="text" name="id" value="{{$department->id}}">
-                                <input type="submit" value="delete">
-                            </form>
-                            @endcan
-                            {{-- <a href="{{route('admin.department.destory',['id'=> $department->id])}}" class="btn btn-danger">
-                                delete
-                            </a> --}}
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
         </div>
-        
+    </div>
 
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
 
-        
+                <div class="card-body">
 
-       
+                    <div class="table-responsive">
+                        <table id="datatable" class="table data-table table-striped">
+                            <thead>
+                                <tr class="ligth">
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th >Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
+                                @foreach ($data as $department)
+                                    <tr>
+                                        <td>{{$department->id}}</td>
+                                        <td>{{ $department->name }}</td>
 
-        <!-- Bootstrap JavaScript Libraries -->
-        <script
-            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-            crossorigin="anonymous"
-        ></script>
+                                            {{-- @can('update workFromHomePermission') --}}
+                                            <td class="flex-td">
+                                                @can('update deparment')
+                                                <a href="{{route('admin.department.edit',['id'=> $department->id])}}" class="btn btn-primary">
+                                                    Edit
+                                                </a>
+                                                @endcan
+                                                @can('delete deparment')
+                                                <form action="{{route('admin.department.destroy')}}" method="POST">
+                                                    <input hidden type="text" name="id" value="{{$department->id}}">
+                                                    <input class="btn btn-danger" type="submit" value="delete">
+                                                </form>
+                                                @endcan
+                                            </td>
+                                            {{-- @endcan --}}
 
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-            crossorigin="anonymous"
-        ></script>
-    </body>
-</html>
+                                            {{-- <td>
+                                            </td> --}}
+
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                <th>Name</th>
+                                <th >Actions</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endsection

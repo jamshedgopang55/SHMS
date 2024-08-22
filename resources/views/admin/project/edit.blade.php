@@ -24,6 +24,10 @@
                                 <label for="project_name">Project Name:</label>
                                 <input type="text" name="project_name" id="project_name" class="form-control" value="{{ $project->name }}" required>
                             </div>
+                            <div class="form-group">
+                                <label for="price">price :</label>
+                                <input readonly type="text" name="price" id="price" class="form-control"  value="{{$project->ticket->price }}" required>
+                            </div>
                         
                             <div class="form-group">
                                 <label for="start_date">Start Date:</label>
@@ -39,6 +43,8 @@
                                 <label for="progress">Progress/Completion:</label>
                                 <input type="range" name="progress" id="progress" class="form-control-range" required min="0" max="100" value="{{ $project->progress }}">
                             </div>
+                        
+                           
                         
                             <div class="card mb-3">
                                 <div class="card-body">

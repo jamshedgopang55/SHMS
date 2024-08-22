@@ -88,7 +88,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Webkit | Responsive Bootstrap 4 Admin Dashboard Template</title>
+    <title>Diginotive Portal Login</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{asset('/assets/images/favicon.ico')}}" />
@@ -157,10 +157,7 @@
                                                                     for="customCheck1">Remember Me</label>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-6">
-                                                            <a href="auth-recoverpw.html"
-                                                                class="text-white float-right">Forgot Password?</a>
-                                                        </div>
+                                               
                                                     </div>
                                                     <button type="submit" class="btn btn-white">Sign In</button>
                                                     {{-- <p class="mt-3">

@@ -19,13 +19,13 @@
         </div>
     </div>
 
-    <p>Total Office Days: {{ $totalOfficeDays }}</p>
+    <!-- <p>Total Office Days: {{ $totalOfficeDays }}</p>
     <p>Present Days: {{ $presentDays }}</p>
     <p>On Time Count: {{ $onTimeCount }}</p>
     <p>Late Count: {{ $lateCount }}</p>
     <p>Early Out Count: {{ $earlyOutCount }}</p>
     <p>Half Day Count: {{ $halfDayCount }}</p>
-    <p>Absent Count: {{ $totalOfficeDays - $presentDays  - $halfDayCount  }}</p>
+    <p>Absent Count: {{ $totalOfficeDays - $presentDays  - $halfDayCount  }}</p> -->
 
 
     <div class="row">

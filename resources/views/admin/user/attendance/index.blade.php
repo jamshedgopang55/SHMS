@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Attendance</title>
+</head>
+
+<body>
+    <h1>Employee Attendance</h1>
+
+    @if (Auth::check())
+        <p>Welcome, {{ Auth::user()->name }}</p>
+
+        {{-- Check if attendance data exists --}}
+        @if ($attendance)
+            {{-- Check if the attendance record belongs to the logged-in user --}}
+            @if ($attendance->uid === Auth::user()->id)
+                {{-- Check if the user is required to check-in or check-out --}}
+                @if ($attendance->attendance_status === 'absent')
+                    <h2>Check-in</h2>
+                    <form action="{{ route('admin.UsersAttendance.checkin') }}" method="POST">
+                        @csrf
+                        <label hidden for="checkin_employee_id">Employee ID:</label>
+                        <input hidden type="text" id="checkin_employee_id" name="employee_id"
+                            value="{{ Auth::user()->id }}" required readonly>
+                        <button type="submit">Check-in</button>
+                    </form>
+                @elseif (
+                    ($attendance->attendance_status === 'present' ||
+                        $attendance->attendance_status === 'late' ||
+                        $attendance->attendance_status === 'half_day') &&
+                        is_null($attendance->out_time))
+                    {{-- Only show the "Check-out" button if the user is present or late --}}
+                    <h2>Check-out</h2>
+                    <form action="{{ route('admin.UsersAttendance.checkout') }}" method="POST">
+                        @csrf
+                        <label hidden for="checkout_employee_id">Employee ID:</label>
+                        <input hidden type="text" id="checkout_employee_id" name="employee_id"
+                            value="{{ Auth::user()->id }}" required readonly>
+                        <button type="submit">Check-out</button>
+                    </form>
+                @else
+                    <p>You are not required to check-in or check-out for today.</p>
+                @endif
+                {{-- If the attendance data doesn't belong to the logged-in user --}}
+            @else
+                <p>Attendance data not found for the logged-in user.</p>
+            @endif
+            {{-- If no attendance data found for today, allow the user to check-in --}}
+        @else
+            <h2>Check-in</h2>
+            <form action="{{ route('admin.UsersAttendance.checkin') }}" method="POST">
+                @csrf
+                <label hidden for="checkin_employee_id">Employee ID:</label>
+                <input hidden type="text" id="checkin_employee_id" name="employee_id" value="{{ Auth::user()->id }}"
+                    required readonly>
+
+                <button type="submit">Check-in</button>
+            </form>
+        @endif
+    @else
+        <p>Please log in to access attendance features.</p>
+    @endif
+</body>
+
+</html>

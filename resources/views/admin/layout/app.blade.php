@@ -4,10 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Webkit</title>
+    <title>Diginotive Portal</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}" />
+    <link rel="shortcut icon" href="{{asset('assets/images/logo.png')}}" />
     <link rel="stylesheet" href="{{asset('/assets/css/backend-plugin.min.css')}}">
     <link rel="stylesheet" href="{{asset('/assets/css/backend.css?v=1.0.0')}}">
     <link rel="stylesheet" href="{{asset('/assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css')}}">
@@ -19,6 +19,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
 
+        .delete-icon{
+            border: none;
+            background: transparent;
+
+        }
         .edit-icon i{
             color: black;
         }
@@ -32,6 +37,13 @@
 
         table tr th,table tr td {
             text-align: center
+        }
+        .flex-td{
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            gap: 10px;
+            border: none !important
         }
 
 
@@ -70,15 +82,7 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ml-auto navbar-list align-items-center">
-                                <li>
-                                    <div class="iq-search-bar device-search">
-                                        {{-- <form action="#" class="searchbox"> --}}
-                                            <a class="search-link" href="#"><i class="ri-search-line"></i></a>
-                                            <input type="text" class="text search-input"
-                                                placeholder="Search here...">
-                                        {{-- </form> --}}
-                                    </div>
-                                </li>
+
                                 <li class="nav-item nav-icon search-content">
                                     <a href="#" class="search-toggle rounded" id="dropdownSearch"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -270,16 +274,17 @@
                                     <a href="#" class="search-toggle dropdown-toggle  d-flex align-items-center"
                                         id="dropdownMenuButton4" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
-                                        <img src="{{asset('/assets/images/user/1.jpg')}}" class="img-fluid rounded-circle"
-                                            alt="user">
+                                        <img src="{{ Auth::check() && Auth::user()->pic ? asset(Auth::user()->pic) : asset('/images/download.png') }}" class="img-fluid rounded-circle">
+
+
                                         <div class="caption ml-3">
-                                            <h6 class="mb-0 line-height">Savannah Nguyen<i
+                                            <h6 class="mb-0 line-height">{{Auth::user()->name }}<i
                                                     class="las la-angle-down ml-2"></i></h6>
                                         </div>
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-right border-none"
                                         aria-labelledby="dropdownMenuButton">
-                                        <li class="dropdown-item d-flex svg-icon">
+                                        {{-- <li class="dropdown-item d-flex svg-icon">
                                             <svg class="svg-icon mr-0 text-primary" id="h-01-p" width="20"
                                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke="currentColor">
@@ -287,7 +292,7 @@
                                                     d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
                                             <a href="../app/user-profile.html">My Profile</a>
-                                        </li>
+                                        </li> --}}
                                         <li class="dropdown-item d-flex svg-icon">
                                             <svg class="svg-icon mr-0 text-primary" id="h-02-p" width="20"
                                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -295,7 +300,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                             </svg>
-                                            <a href="../app/user-profile-edit.html">Edit Profile</a>
+                                            <a href="{{route('admin.profileEdit')}}">Edit Profile</a>
                                         </li>
                                         <li class="dropdown-item d-flex svg-icon">
                                             <svg class="svg-icon mr-0 text-primary" id="h-03-p" width="20"
@@ -471,7 +476,7 @@
             </div>
         </div>
     </div>
-  
+
     <div class="modal fade bd-example-modal-lg" role="dialog" aria-modal="true" id="new-create-modal">
         <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">

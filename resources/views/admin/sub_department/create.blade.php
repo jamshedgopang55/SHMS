@@ -1,77 +1,53 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <title>Title</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
-
-        <!-- Bootstrap CSS v5.2.1 -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous"
-        />
-    </head>
-
-    <body style="display: grid;place-items:center;">
-        
-
-        <div>
-            <h1 class="my-4">Sub Departments</h1>
-
-            <form style="max-width:700px" class="border p-5" method="post" action="{{route('admin.subdepartment.store')}}">
-                @csrf
-
-                <div class="mb-3">
-                    <label for="" class="form-label">Sub Department Name</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        name="name"               
-                    />
+@extends('admin.layout.app')
+@section('content')
+<div class="row">
+    <div class="col-sm-12 col-lg-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <div class="header-title">
+                   <h4 class="card-title">Create Sub Department</h4>
                 </div>
-                <div class="mb-3">
-                    <label for="" class="form-label">Department</label>
-                    <select
-                        class="form-select form-select-lg"
-                        name="department_id"
-                       
-                    >
-                    @foreach ($departments as $depart)
-                        <option value="{{$depart->id}}" selected>{{$depart->name}}</option>
-                    @endforeach
-                    </select>
-                </div>
-                
-                
-                <div class="mb-3">
-                    <input
-                        type="submit"
-                        class="form-control"
-                        value="Create SubDepart"               
-                    />
-                </div>
-            </form>
+             </div>
 
+            <div class="card-body">
+                <form action="{{route('admin.subdepartment.store')}}" method="POST">
+                    @csrf
+                    <div class="row">
+                    <div  class="form-group col-md-6">
+                        <label >Sub Department Name</label>
+                        <input required name="name" placeholder="Name ..." class="form-control">
+                    </div>
+                    <div  class="form-group col-md-6">
+                        <label for="" class="form-label">Department</label>
+                        <select
+                            class="form-select form-control form-select-lg"
+                            name="department_id" required
+
+                        >
+                        @foreach ($departments as $depart)
+                            <option value="{{$depart->id}}" selected>{{$depart->name}}</option>
+                        @endforeach
+                        </select>
+                    </div>
+                    <div class="col-12 pt-3">
+
+                        <button type="submit" class="btn btn-primary">Create Sub Department</button>
+                    </div>
+                        </div>
+
+                    @if ($errors->any())
+                    <ul class="alert alert-warning">
+                        @foreach ($errors->all() as $error)
+                            <li>{{$error}}</li>
+                        @endforeach
+                    </ul>
+                    @endif
+                </form>
+            </div>
         </div>
 
+    </div>
+ </div>
 
-        <!-- Bootstrap JavaScript Libraries -->
-        <script
-            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-            crossorigin="anonymous"
-        ></script>
+@endsection
 
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-            crossorigin="anonymous"
-        ></script>
-    </body>
-</html>

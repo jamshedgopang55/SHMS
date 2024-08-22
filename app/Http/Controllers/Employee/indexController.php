@@ -43,7 +43,7 @@ class indexController extends Controller
     
         if(Auth::guard('employee')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))){
             Auth::logout();
-            return  Redirect()->route('employee.index');
+            return  Redirect()->route('employee.attendance.index');
           
         } else {
             return redirect()->route('employee.login')->with('error' ,'Invalid Email Or Password');

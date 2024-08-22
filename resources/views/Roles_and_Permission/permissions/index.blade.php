@@ -1,53 +1,91 @@
-<div class="container mt-2">
+
+@extends('admin.layout.app')
+@section('content')
     <div class="row">
-        <div class="col-md-12">
-
+        <div class="col-lg-12">
             @if (session('status'))
-                <div class="alert alert-success">{{ session('status') }}</div>
-            @endif
-
-            <div class="card mt-3">
-                <div class="card-header">
-                    <h4>Permissions
-                        @can('create permission')
-                            <a href="{{ url('permissions/create') }}" class="btn btn-primary float-end">Add Permission</a>
-                        @endcan
-                    </h4>
-                </div>
+            <div class="alert alert-success">{{ session('status') }}</div>
+        @endif
+            <div class="card">
                 <div class="card-body">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between breadcrumb-content">
+                        <h5>Permissions</h5>
+                        <div class="d-flex align-items-center">
+                            @can('create permission')
+                            <div class="pl-3 border-left btn-new">
+                                <a href="{{ url('admin/Permission/create') }}" class="btn btn-primary">Create Permission
+                                    </a>
+                            </div>
+                            @endcan
 
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Name</th>
-                                <th width="40%">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($permissions as $permission)
-                                <tr>
-                                    <td>{{ $permission->id }}</td>
-                                    <td>{{ $permission->name }}</td>
-                                    <td>
-                                        @can('update permission')
-                                            <a href="{{ url('admin/Permission/edit/'.$permission->id ) }}"
-                                                class="btn btn-success">Edit</a>
-                                        @endcan
-
-                                        @can('delete permission')
-                                        <form action="{{route('admin.Permission.destroy')}}" method="POST">
-                                            <input hidden type="text" name="id" value="{{$permission->id}}">
-                                            <input type="submit" value="delete">
-                                        </form>
-                                        @endcan
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+
+                <div class="card-body">
+
+                    <div class="table-responsive">
+                        <table id="datatable" class="table data-table table-striped">
+                            <thead>
+                                <tr class="ligth">
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th >Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach ($permissions as $permission)
+                                    <tr>
+                                        <td>{{ $permission->id }}</td>
+                                        <td>{{ $permission->name }}</td>
+
+                                            @can('update permission')
+                                            <td>
+                                                <a href="{{ url('admin/Permission/edit/'.$permission->id ) }}" class="edit-icon"><i
+                                                    class="fa-solid fa-pen-to-square"></i></a>
+                                            
+                                            @endcan
+
+                                            @can('delete permission')
+                    
+                                                <form
+                                                action="{{route('admin.Permission.destroy')}}"
+                                                method="POST" style="display: inline-block;">
+                                                @csrf
+                                                <input hidden type="text" name="id" value="{{$permission->id}}">
+
+                                                <button type="submit"  class="delete-icon"
+                                                onclick="return confirm('Are you sure you want to delete this permission?')"><i class="fa-solid fa-trash"></i></button>
+                                                </form>
+                                            </td>
+                                            @endcan
+
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th >Action</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endsection

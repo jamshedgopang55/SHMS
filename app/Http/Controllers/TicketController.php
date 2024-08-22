@@ -39,9 +39,9 @@ class TicketController extends Controller
         $data['employees'] = Employee::all();
         return view('employee.ticket.create', $data);
     }
+   
     public function store(Request  $request)
     {
-
         $rules = [
             'fname' => 'required',
             'lname' => 'required',
@@ -94,6 +94,7 @@ class TicketController extends Controller
             $ticket->price = $request->price;;
             $ticket->status = "Open";
             $ticket->save();
+            
             if (!empty($request->images_array)) {
                 foreach ($request->images_array as $temp_img_id) {
                     $temp_img = temp_file::find($temp_img_id);

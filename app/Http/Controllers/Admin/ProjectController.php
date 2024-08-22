@@ -81,8 +81,8 @@ class ProjectController extends Controller
 
     public function edit($id)
     {
-        $project = Project::findOrFail($id);
-
+        // return 'dsf';
+        $project = Project::with('ticket')->findOrFail($id);
         $assign_members = [];
 
         // Check if assign_members field is not null

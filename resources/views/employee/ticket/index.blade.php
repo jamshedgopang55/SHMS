@@ -1,6 +1,5 @@
 
 
-
 @extends('employee.layout.app')
 @section('content')
     <div class="row">
@@ -10,39 +9,18 @@
                     <div class="d-flex flex-wrap align-items-center justify-content-between breadcrumb-content">
                         <h5>Tickets</h5>
                         <div class="d-flex align-items-center">
-                            <div class="list-grid-toggle d-flex align-items-center mr-3">
-                                <div data-toggle-extra="tab" data-target-extra="#grid" class="active">
-                                    <div class="grid-icon mr-3">
-                                        <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round">
-                                            <rect x="3" y="3" width="7" height="7"></rect>
-                                            <rect x="14" y="3" width="7" height="7"></rect>
-                                            <rect x="14" y="14" width="7" height="7"></rect>
-                                            <rect x="3" y="14" width="7" height="7"></rect>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div data-toggle-extra="tab" data-target-extra="#list">
-                                    <div class="grid-icon">
-                                        <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round">
-                                            <line x1="21" y1="10" x2="3" y2="10"></line>
-                                            <line x1="21" y1="6" x2="3" y2="6"></line>
-                                            <line x1="21" y1="14" x2="3" y2="14"></line>
-                                            <line x1="21" y1="18" x2="3" y2="18"></line>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
+                         
+                            <!--<div class="pl-3 border-left btn-new">-->
+                            <!--    <a href="{{route('admin.ticket.accepted')}}" class="btn btn-primary" -->
+                            <!--    >Accepted Tickets</a>-->
+                            <!--</div>-->
+                            <!--<div class="pl-3 border-left btn-new">-->
+                            <!--    <a href="{{route('admin.ticket.rejected')}}" class="btn btn-primary" -->
+                            <!--    >Rejected Tickets</a>-->
+                            <!--</div>-->
                             <div class="pl-3 border-left btn-new">
-                                <a href="{{route('admin.ticket.accepted')}}" class="btn btn-primary" 
-                                >Accepted Tickets</a>
-                            </div>
-                            <div class="pl-3 border-left btn-new">
-                                <a href="{{route('admin.ticket.rejected')}}" class="btn btn-primary" 
-                                >Rejected Tickets</a>
+                                <a href="{{route('employee.ticket.create')}}" class="btn btn-primary" 
+                                >Create Ticket</a>
                             </div>
                         </div>
                     </div>
@@ -91,7 +69,7 @@
                                             <td>{{ $ticket->price }}</td>
                                             <td>{{ $ticket->status }}</td>
                                             <td>
-                                                <a href="{{ route('employee.ticket.show', $ticket->id) }}">View</a>
+                                                <a  class="btn btn-primary" href="{{ route('employee.ticket.show', $ticket->id) }}">View</a>
                                                 {{-- <a href="{{ url('Employee/destory', $Employee->id) }}" class="btn btn-danger">Delete</a> --}}
                                             </td>
                                         </tr>

@@ -11,7 +11,7 @@
                         <div class="dropdown status-dropdown mr-3">
                             <div class="dropdown-toggle" id="dropdownMenuButton03"
                                 data-toggle="dropdown">
-                                <div class="btn bg-body"><span class="h6">Status :</span> In Progress<i
+                                <div     class="btn bg-body"><span class="h6">Status :</span> In Progress<i
                                         class="ri-arrow-down-s-line ml-2 mr-0"></i></div>
                             </div>
                             <div class="dropdown-menu dropdown-menu-right"
@@ -50,10 +50,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="pl-3 border-left btn-new">
+                        {{-- <div class="pl-3 border-left btn-new">
                             <a href="#" class="btn btn-primary" data-target="#new-project-modal"
                                 data-toggle="modal">New Project</a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                         <i class="ri-star-fill m-0 text-warning"></i>
                     </div>
                     <h5 class="mb-1">{{$project->name}}</h5>
-                    <p class="mb-3">Preparing framework of block-based WordPress Theme.</p>
+                    <p class="mb-3">{{$project->ticket->description}}</p>
                     <div class="d-flex align-items-center justify-content-between pt-3 border-top">
                         @if ($project->assign_members != null)
                             @php

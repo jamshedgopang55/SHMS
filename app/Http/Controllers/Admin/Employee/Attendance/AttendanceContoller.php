@@ -20,6 +20,7 @@ class AttendanceContoller extends Controller
     }
     public function checkin(Request $request)
     {
+
         // Get the currently authenticated employee
         $employee = auth()->guard('employee')->user();
 
@@ -27,7 +28,7 @@ class AttendanceContoller extends Controller
         $attendance = Attendance::where('uid', $employee->id)
             ->whereDate('date', today())
             ->first();
-
+        // return $attendance;
         if (!$attendance) {
             // Get the employee's schedule
             $schedule = Schedule::find($employee->schedule_id);

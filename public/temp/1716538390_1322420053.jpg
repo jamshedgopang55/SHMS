@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="tYbk4gMwbLNenqU9QYd6LiyQcJZgs6w7HfDyqSGX">
+    <title></title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="http://localhost:8000/admin/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
+    <!-- Theme style -->
+    
+    <link rel="stylesheet" href="http://localhost:8000/admin/css/adminlte.min.css">
+    <link rel="stylesheet" href="http://localhost:8000/admin/plugins/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="http://localhost:8000/admin/plugins/dropzone/dropzone.css">
+    <link rel="stylesheet" href="http://localhost:8000/admin/css/custom.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js" defer></script>
+
+    <style>
+        .deletebtn{
+            background-color: transparent;
+            border: none;
+            transition: .2s
+        }
+        .deletebtn:hover{
+            color: red
+        }
+        .swal2-popup.swal2-toast{
+            width: 100% !important;
+            display: flex !important;
+            align-items: center;
+            flex-direction: row;
+        }
+        .swal2-title {
+            color: rgba(0, 0, 0, 0.845)
+        }
+        table a{
+            cursor: pointer;
+            /* border: 2px solid black; */
+            margin: 0px 5px
+        }
+
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Right navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                      <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>					
+            </ul>
+            <div class="navbar-nav pl-2">
+                    <!-- <ol class="breadcrumb p-0 m-0 bg-white">
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol> -->
+            </div>
+            
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link p-0 pr-3" data-toggle="dropdown" href="#">
+                        <img src="http://localhost:8000/admin/img/avatar5.png" class='img-circle elevation-2' width="40" height="40" alt="">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-3">
+                        <h4 class="h4 mb-0"><strong>new</strong></h4>
+                        <div class="mb-3">admin@gmail.com</div>
+                        <div class="dropdown-divider"></div>
+                        <a href="http://localhost:8000/user/profile" class="dropdown-item">
+                            <i class="fas fa-user-cog mr-2"></i>Account Settings								
+                        </a>
+                        
+                        <div class="dropdown-divider"></div>
+                        <form action="http://localhost:8000/logout" method="POST">
+                            <input type="hidden" name="_token" value="tYbk4gMwbLNenqU9QYd6LiyQcJZgs6w7HfDyqSGX" autocomplete="off">   
+                        <a type="submit" href="#" class="dropdown-item text-danger">
+                         <button type="submit">
+                            <i  class="fas fa-sign-out-alt mr-2"></i> Logout	
+                         </button>
+                           						
+                        </a>			
+                    </form>				
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="#" class="brand-link">
+                <img src="http://localhost:8000/admin/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">Atheroverseas</span>
+            </a>
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user (optional) -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+                            with font-awesome or any other icon font library -->
+                       
+                        
+                        <li class="nav-item">
+                            <a href="http://localhost:8000/admin/home/banners" class="nav-link  ">
+                                <i class="nav-icon fa-solid fa-rectangle-history-circle-plus"></i>
+                                <p>Banners</p>
+                            </a>
+                        </li>
+
+                       <li class="nav-item">
+                            <a href="http://localhost:8000/admin/home/about/1/edit" class="nav-link ">
+                                <i class="nav-icon fa-brands fa-product-hunt"></i>
+                                <p>Home About Section</p>
+                            </a>
+                        </li>
+                      
+                       <li class="nav-item">
+                            <a href="http://localhost:8000/admin/industries" class="nav-link ">
+                                <i class="nav-icon fa-regular fa-layer-group"></i>
+                                <p>Industries</p>
+                            </a>
+                        </li>
+                       
+                        <li class="nav-item">
+                            <a href="http://localhost:8000/admin/our-partners" class="nav-link ">
+                                <i class="nav-icon fa-regular fa-newspaper"></i>
+                                <p>Our Partners</p>
+                            </a>
+                        </li>
+                        
+                          <li class="nav-item">
+                            <a href="http://localhost:8000/admin/certified" class="nav-link ">
+                                <i class="nav-icon fa-regular fa-address-card"></i>
+                                <p>certified</p>
+                            </a>
+                        </li>
+
+                          <li class="nav-item">
+                            <a href="http://localhost:8000/admin/VisionMission" class="nav-link ">
+                                <i class="nav-icon fa-regular fa-address-card"></i>
+                                <p>Vision & Mission</p>
+                            </a>
+                        </li>
+                       <li class="nav-item">
+                            <a href="http://localhost:8000/admin/fact_banners/1/edit" class="nav-link ">
+                                <i class="nav-icon fa-regular fa-memo-circle-check"></i>
+                                <p>Fact Banner</p>
+                            </a>
+                        </li> 
+
+                        <li class="nav-item">
+                            <a href="http://localhost:8000/admin/blog" class="nav-link ">
+                                <i class="nav-icon fa-regular fa-newspaper"></i>
+                                <p>Blogs</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="http://localhost:8000/admin/procedure" class="nav-link ">
+                                <i class="nav-icon fa-regular fa-newspaper"></i>
+                                <p>Procedure</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="http://localhost:8000/admin/ceo_messages/1/edit" class="nav-link ">
+                                <i class="nav-icon fa-regular fa-newspaper"></i>
+                                <p>Ceo Message</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="http://localhost:8000/admin/industry-categories" class="nav-link ">
+                                <i class="nav-icon fa-regular fa-memo-circle-check"></i>
+                                <p>industry-categories</p>
+                            </a>
+                        </li> 
+
+                        <li class="nav-item">
+                            <a href="http://localhost:8000/admin/AboutUs/1/edit" class="nav-link ">
+                                <i class="nav-icon fa-regular fa-memo-circle-check"></i>
+                                <p>AboutUs</p>
+                            </a>
+                        </li> 
+
+
+                        <li class="nav-item">
+                            <a href="http://localhost:8000/admin/Information/1/edit" class="nav-link ">
+                                <i class="nav-icon fa-regular fa-memo-circle-check"></i>
+                                <p>Information</p>
+                            </a>
+                        </li> 
+
+
+                         <li class="nav-item">
+                            <a href="http://localhost:8000/admin/why_choose_us/1/edit" class="nav-link ">
+                                <i class="nav-icon fa-regular fa-memo-circle-check"></i>
+                                <p>Why Choose Us</p>
+                            </a>
+                        </li> 
+
+                         <li class="nav-item">
+                            <a href="http://localhost:8000/admin/TradePartner/1/edit" class="nav-link ">
+                                <i class="nav-icon fa-regular fa-memo-circle-check"></i>
+                                <p>Trade Partner</p>
+                            </a>
+                        </li> 
+
+                         <li class="nav-item">
+                            <a href="http://localhost:8000/admin/extras/1/edit" class="nav-link ">
+                                <i class="nav-icon fa-regular fa-memo-circle-check"></i>
+                                <p>Extra and Optinal</p>
+                            </a>
+                        </li> 
+                        
+
+
+
+
+                        
+                      			
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+         </aside>
+        
+        
+        <!-- Content Wrapper. Contains page content -->
+         
+
+    <style>
+        a {
+            cursor: pointer;
+        }
+
+        .flex {
+            gap: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .colorimage {
+            width: 90px;
+            margin: 2px;
+        }
+
+        .colorimage-row {
+            /* border: .5px solid gray; */
+            border-radius: 5px;
+            padding: 10px 0px !important
+        }
+
+        #product-gallery {
+            margin: 20px 0px !important;
+            margin-bottom: 40px !important;
+            border: 1px solid #afa6a6;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .dropzoneimg {
+            /* margin: 20px 5px!important; */
+            margin-bottom: 21px !important;
+            border: 1px solid #afa6a6;
+            border-radius: 10px;
+            padding: 10px 20px;
+        }
+
+        .dropzoneimg .card-body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0px !important;
+            padding-top: 8px !important;
+        }
+
+        .img-delte-btn {
+            background: #ef020263;
+            padding: 8px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .2s;
+            cursor: pointer;
+        }
+
+        .img-delte-btn:hover {
+            color: white !important;
+            background-color: #f10017;
+        }
+    </style>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid my-2">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>update vacancy</h1>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        <a href="http://localhost:8000/admin/vacancies" class="btn btn-primary">Back</a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <form id="form" class="border p-3 w-100" enctype="multipart/form-data">
+                <input type="hidden" name="_token" value="tYbk4gMwbLNenqU9QYd6LiyQcJZgs6w7HfDyqSGX" autocomplete="off">                <!-- Default box -->
+                <div class="container-fluid">
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="title">name</label>
+                                                <input required type="text" name="name"  class="form-control"
+                                                  
+                                                    value="sdsf">
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="title">Email</b></label>
+                                                <input required type="text"  class="form-control"
+                                                    value="jamshedgopang283@gmail.com">
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="title">Phone</b></label>
+                                                <input required type="text"  class="form-control"
+                                                    value="222">
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="title"> Company Name</b></label>
+                                                <input required type="text"  class="form-control"
+                                                    value="Holloway Fletcher Associates">
+                                            </div>
+
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="title">Skype Id</b></label>
+                                                <input required type="text"  class="form-control"
+                                                    value="">
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="title">Company Website</b></label>
+                                                <input required type="text"  class="form-control"
+                                                    value="">
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="title">city</b></label>
+                                                <input required type="text"  class="form-control"
+                                                    value="Eaton and Santiago LLC">
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="title">experience</b></label>
+                                                <input required type="text"  class="form-control"
+                                                    value="student">
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="title">country</b></label>
+                                                <input required type="text"  class="form-control"
+                                                    value="Hoyt Cortez">
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="title">role</b></label>
+                                                <a download="http://localhost:8000/images/AboutUs/AboutUs-1-kuzaT21715845781.jpg" href="#">Download</a>
+
+                                               
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="pb-5 pt-3">
+                        <button id='btn' class="btn btn-primary">Create</button>
+                        <a href="http://localhost:8000/admin/vacancies" class="btn btn-outline-dark ml-3">Cancel</a>
+                    </div>
+                </div>
+                <!-- /.card -->
+            </form>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+        <!-- /.content-wrapper -->
+        
+
+
+
+        <footer class="main-footer">
+            <strong>Copyright &copy; 2023-2024 Atheroverseas rights reserved.
+        </footer>
+        
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="http://localhost:8000/admin/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="http://localhost:8000/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="http://localhost:8000/admin/js/adminlte.min.js"></script>
+    <script src="http://localhost:8000/admin/plugins/summernote/summernote-bs4.min.js"></script>
+    <script src="http://localhost:8000/admin/plugins/dropzone/dropzone.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="http://localhost:8000/admin/js/demo.js"></script>
+
+    <script>  
+        $(function () {
+            // Summernote
+            $('.summernote').summernote({
+                height: '300px'
+            });
+        });
+    </script>
+
+    </body>
+</html>

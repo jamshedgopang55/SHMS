@@ -1,58 +1,65 @@
-<!doctype html>
-<html lang="en">
+@extends('admin.layout.app')
+@section('content')
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between breadcrumb-content">
+                        <h5>Admin</h5>
+                        <div class="d-flex align-items-center">
 
-<head>
-    <title>User</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-    <!-- Bootstrap CSS v5.2.1 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-</head>
-
-<body class="text-center">
-    @if ($errors->any())
-        <ul class="alert alert-warning">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
-    <div class="container">
-        <h1 class="mt-5">User</h1>
-        <div class="m-3" style="text-align: right">
-            <a href="{{ route('admin.user.create') }}" class="btn text btn-primary">Create New user</a>
+                            <div class="pl-3 border-left btn-new">
+                                <a href="{{route('admin.user.create')}}" class="btn btn-primary">New
+                                    Admin</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="table-responsive">
-            <table class="table table-primary">
-                <thead>
-                    <tr>
-                        <th scope="col">User ID</th>
+    </div>
 
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">role</th>
-                        <th scope="col">Picture</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($data as $user)
-                        <tr>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+
+                <div class="card-body">
+
+                    <div class="table-responsive">
+                        <table id="datatable" class="table data-table table-striped">
+                            <thead>
+                                <tr class="ligth">
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>role</th>
+                                    <th>Attendance</th>
+                                    <th>Pic</th>
+                                    <th>Action</th>
+                                   
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach ($data as $user)
+                                      <tr>
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->phone }}</td>
                             <td>
-                                @if (!empty($user->getRoleNames()))
+                            @if (!empty($user->getRoleNames()))
                                     @foreach ($user->getRoleNames() as $rolename)
                                         <label class="badge bg-primary mx-1">{{ $rolename }}</label>
                                     @endforeach
                                 @endif
                             </td>
+                            <td><a href="{{route('admin.UsersAttendance.show',$user->id)}}">Attendace</a></td>
+                           
+                               
+                           
                             <td>
                                 <img src="{{ asset($user->pic) }}" alt="Profile Picture"
                                     style="max-width: 100px; max-height: 100px;">
@@ -66,19 +73,29 @@
                                 @endcan
                             </td>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                                @endforeach
+
+                            </tbody>
+                            <tfoot>
+                                <tr class="ligth">
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>role</th>
+                                    <th>Attendance</th>
+                                    <th>Pic</th>
+                                    <th>Action</th>
+                                   
+
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Bootstrap JavaScript Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
-    </script>
-</body>
-
-</html>
+   
+@endsection

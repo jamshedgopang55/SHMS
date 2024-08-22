@@ -7,32 +7,7 @@
                     <div class="d-flex flex-wrap align-items-center justify-content-between breadcrumb-content">
                         <h5>Tickets</h5>
                         <div class="d-flex align-items-center">
-                            <div class="list-grid-toggle d-flex align-items-center mr-3">
-                                <div data-toggle-extra="tab" data-target-extra="#grid" class="active">
-                                    <div class="grid-icon mr-3">
-                                        <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round">
-                                            <rect x="3" y="3" width="7" height="7"></rect>
-                                            <rect x="14" y="3" width="7" height="7"></rect>
-                                            <rect x="14" y="14" width="7" height="7"></rect>
-                                            <rect x="3" y="14" width="7" height="7"></rect>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div data-toggle-extra="tab" data-target-extra="#list">
-                                    <div class="grid-icon">
-                                        <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round">
-                                            <line x1="21" y1="10" x2="3" y2="10"></line>
-                                            <line x1="21" y1="6" x2="3" y2="6"></line>
-                                            <line x1="21" y1="14" x2="3" y2="14"></line>
-                                            <line x1="21" y1="18" x2="3" y2="18"></line>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="pl-3 border-left btn-new">
                                 <a href="{{ route('admin.ticket.index') }}" class="btn btn-primary">New Tickets</a>
                             </div>
@@ -46,7 +21,6 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
@@ -58,7 +32,7 @@
                     <div class="card-body">
 
                         <div class="table-responsive">
-                            <table id="datatable" class="table data-table table-striped">
+                            <table id="datatable" class="table data-table table-striped" style="text-transform: capitalize">
                                 <thead>
                                     <tr class="ligth">
 
@@ -77,7 +51,7 @@
 
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody >
 
                                     @foreach ($tickets as $ticket)
                                         <tr>
@@ -91,12 +65,12 @@
                                             <td>{{ $ticket->priority }}</td>
 
                                             <td>{{ $ticket->price }}</td>
-                                            <td>{{ $ticket->status }}</td>
+                                            <td> <button class="btn btn-success" style="background: #158f15;border:none;text-transform:capitalize">{{ $ticket->status }}</button> </td>
 
                                             {{-- <td><img src="{{ asset($Eticketsmployee->pic) }}" alt="Profile Picture" style="max-width: 100px; max-height: 100px;"></td> --}}
                                             <td>
                                                 <a href="{{ url('admin/ticket/show', $ticket->id) }}"
-                                                    class="btn btn-warning">view</a>
+                                                    class="btn btn-primary">view</a>
                                                 <form action="{{ route('admin.project.create') }}" method="POST">
                                                     @csrf
                                                     <input type="number" hidden name="id" value="{{ $ticket->id }}"
@@ -153,5 +127,4 @@
                 </div>
             </div>
         </div>
-    </div>
 @endsection

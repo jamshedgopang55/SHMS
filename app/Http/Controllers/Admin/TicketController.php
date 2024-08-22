@@ -30,8 +30,9 @@ class TicketController extends Controller
     }
     public function show($id)
     {
-        $ticket = Ticket::findOrFail($id);
+        $ticket = Ticket::with('client')->findOrFail($id);
         $attachments = Attachment::with('tempFile')->where('ticket_id', $ticket->id)->get();
+        // dd($ticket);
         return view('admin.ticket.show', compact('ticket', 'attachments'));
     }
     public function accept(Ticket $ticket)

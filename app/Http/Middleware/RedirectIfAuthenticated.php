@@ -20,6 +20,7 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         if(Auth::check()){
+            // Auth::logout();
             return redirect()->back();
         }
       

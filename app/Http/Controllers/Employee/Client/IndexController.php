@@ -20,7 +20,7 @@ class IndexController extends Controller
     }
     public function store(Request $request)
     {
-        // return $request;
+       
         
         $rules = [
             'fname' => 'required',

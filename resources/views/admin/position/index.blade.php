@@ -49,7 +49,7 @@
                                 Edit
                             </a>
 
-                            <a href="{{route('admin.position.destory',['id'=> $position->id])}}" class="btn btn-danger">
+                            <a href="{{route('admin.position.destroy',['id'=> $position->id])}}" class="btn btn-danger">
                                 delete
                             </a>
                         </td>

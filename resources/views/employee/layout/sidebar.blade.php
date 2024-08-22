@@ -1,8 +1,8 @@
 <div class="iq-sidebar  sidebar-default ">
-    <div class="iq-sidebar-logo d-flex align-items-center">
+    <div class="iq-sidebar-logo d-flex align-items-center justify-content-center">
         <a href="../backend/index.html" class="header-logo">
-            <img src="/assets/images/logo.svg" alt="logo">
-            <h3 class="logo-title light-logo">Webkit</h3>
+            <img style="height:50px !important" src="/assets/images/logo.png" alt="logo">
+            <!--<h3 class="logo-title light-logo">Webkit</h3>-->
         </a>
         <div class="iq-menu-bt-sidebar ml-0">
             <i class="las la-bars wrapper-menu"></i>
@@ -11,7 +11,7 @@
     <div class="data-scrollbar" data-scroll="1">
         <nav class="iq-sidebar-menu">
             <ul id="iq-sidebar-toggle" class="iq-menu">
-                <li class="">
+                <!-- <li class="{{ request()->routeIs('employee..index','employee..create','employee..edit') ? 'active' : '' }}">
                     <a href="{{route('employee.index')}}" class="svg-icon">
                         <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -21,8 +21,19 @@
                         </svg>
                         <span class="ml-4">Dashboards</span>
                     </a>
+                </li> -->
+                <li class="{{ request()->routeIs('employee.attendance.index') ? 'active' : '' }}">
+                    <a href="{{route('employee.attendance.index')}}" class="svg-icon">
+                        <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        <span class="ml-4">Attendance</span>
+                    </a>
                 </li>
-                <li class="">
+                <li class="{{ request()->routeIs('employee.project.index','employee.project.create','employee.project.edit') ? 'active' : '' }}">
                     <a href="{{route('employee.project.index')}}" class="svg-icon">
                         <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -36,7 +47,9 @@
                         <span class="ml-4">Projects</span>
                     </a>
                 </li>
-                {{-- <li class="">
+                
+             
+                {{-- <li class="{{ request()->routeIs('employee..index','employee..create','employee..edit') ? 'active' : '' }}">
                     <a href="../backend/page-task.html" class="svg-icon">
                         <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -49,8 +62,8 @@
                         <span class="ml-4">Task</span>
                     </a>
                 </li> --}}
-                {{-- <li class="">
-                    <a href="{{route('admin.Employee.index')}}" class="svg-icon">
+                {{-- <li class="{{ request()->routeIs('employee..index','employee..create','employee..edit') ? 'active' : '' }}">
+                    <a href="{{route('employee.Employee.index')}}" class="svg-icon">
                         <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round">
@@ -60,8 +73,9 @@
                         <span class="ml-4">Employees</span>
                     </a>
                 </li> --}}
-                <li class="">
-                    @if (Auth::guard('employee')->user()->department->name == 'Seles')
+                <li class="{{ request()->routeIs('employee.ticket.index','employee.ticket.create','employee.ticket.edit') ? 'active' : '' }}">
+                @if (Auth::guard('employee')->user()->department->name == 'Sales' || Auth::guard('employee')->user()->department->name == 'SEO Executive')
+
                     <a href="{{route('employee.ticket.index')}}" class="svg-icon">
                         <svg class="svg-icon" width="25" height="25"
                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
@@ -77,21 +91,12 @@
                     </a>
                     @endif
                 </li>
-                <li class="">
-                    <a href="../backend/page-calender.html" class="svg-icon">
-                        <svg class="svg-icon" width="25" height="25"
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2">
-                            </rect>
-                            <line x1="16" y1="2" x2="16" y2="6"></line>
-                            <line x1="8" y1="2" x2="8" y2="6"></line>
-                            <line x1="3" y1="10" x2="21" y2="10"></line>
-                        </svg>
-                        <span class="ml-4">Calender</span>
-                    </a>
-                </li>
+
+
+              
+              
+
+                    @if (Auth::guard('employee')->user()->department->name == 'Seles')
                 <li class=" ">
                     <a href="#otherpage" class="collapsed" data-toggle="collapse" aria-expanded="false">
                         <svg class="svg-icon" width="25" height="25"
@@ -102,12 +107,12 @@
                                 d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
                             </path>
                         </svg>
-                        <span class="ml-4">other page</span>
+                        <span class="ml-4">Other</span>
                         <i class="las la-angle-right iq-arrow-right arrow-active"></i>
                         <i class="las la-angle-down iq-arrow-right arrow-hover"></i>
                     </a>
                     <ul id="otherpage" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                        <li class=" ">
+                        <li class="">
                             <a href="#user" class="collapsed" data-toggle="collapse"
                                 aria-expanded="false">
                                 <svg class="svg-icon" id="p-dash10" width="20" height="20"
@@ -118,34 +123,32 @@
                                     <circle cx="8.5" cy="7" r="4"></circle>
                                     <polyline points="17 11 19 13 23 9"></polyline>
                                 </svg>
-                                <span class="ml-4">User Details</span>
+                                <span class="ml-4">Client Details</span>
                                 <i class="las la-angle-right iq-arrow-right arrow-active"></i>
                                 <i class="las la-angle-down iq-arrow-right arrow-hover"></i>
                             </a>
                             <ul id="user" class="iq-submenu collapse" data-parent="#otherpage">
-                                <li class="">
-                                    <a href="../app/user-profile.html">
-                                        <i class="las la-minus"></i><span>User Profile</span>
-                                    </a>
-                                </li>
-                                <li class="">
+
+                                <li class="{{ request()->routeIs('employee.client.create') ? 'active' : '' }}">
                                     <a href="{{route('employee.client.create')}}">
-                                        <i class="las la-minus"></i><span>User Add</span>
+                                        <i class="las la-minus"></i><span>Client Add</span>
                                     </a>
                                 </li>
-                                <li class="">
+                                <li class="{{ request()->routeIs('employee.client.index') ? 'active' : '' }}">
                                     <a href="{{route('employee.client.index')}}">
-                                        <i class="las la-minus"></i><span>User List</span>
+                                        <i class="las la-minus"></i><span>Client List</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
-                     
+
                     </ul>
                 </li>
+                @endif
+
             </ul>
         </nav>
-        <div id="sidebar-bottom" class="position-relative sidebar-bottom">
+        <!-- <div id="sidebar-bottom" class="position-relative sidebar-bottom">
             <div class="card border-none mb-0 shadow-none">
                 <div class="card-body p-0">
                     <div class="sidebarbottom-content">
@@ -167,7 +170,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="pt-5 pb-2"></div>
     </div>
 </div>

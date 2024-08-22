@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Models\WorkFromHomePermission;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,9 +19,8 @@ class OfficeWifiMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Define office Wi-Fi IP addresses or range
-        $officeIpAddresses =  explode(',', env('OFFICE_IP_ADDRESSES'));
-
+        $officeIpAddresses = ["103.244.176.249", "192.168.1.0/24"];
+        Log::debug('Hardcoded Office IP Addresses: ', $officeIpAddresses);
         // Get the user's IP address
         $userIp = $request->ip();
 

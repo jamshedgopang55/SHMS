@@ -4,10 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Webkit</title>
+    <title>Diginotive Portal</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}" />
+    <link rel="shortcut icon" href="{{asset('assets/images/logo.png')}}" />
     <link rel="stylesheet" href="{{asset('/assets/css/backend-plugin.min.css')}}">
     <link rel="stylesheet" href="{{asset('/assets/css/backend.css?v=1.0.0')}}">
     <link rel="stylesheet" href="{{asset('/assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css')}}">
@@ -35,8 +35,6 @@
                     <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
                         <i class="ri-menu-line wrapper-menu"></i>
                         <a href="../backend/index.html" class="header-logo">
-                            <h4 class="logo-title text-uppercase">Webkit</h4>
-
                         </a>
                     </div>
                     <div class="navbar-breadcrumb">
@@ -50,15 +48,7 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ml-auto navbar-list align-items-center">
-                                <li>
-                                    <div class="iq-search-bar device-search">
-                                        {{-- <form action="#" class="searchbox"> --}}
-                                            <a class="search-link" href="#"><i class="ri-search-line"></i></a>
-                                            <input type="text" class="text search-input"
-                                                placeholder="Search here...">
-                                        {{-- </form> --}}
-                                    </div>
-                                </li>
+
                                 <li class="nav-item nav-icon search-content">
                                     <a href="#" class="search-toggle rounded" id="dropdownSearch"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -250,10 +240,11 @@
                                     <a href="#" class="search-toggle dropdown-toggle  d-flex align-items-center"
                                         id="dropdownMenuButton4" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
-                                        <img src="{{asset('/assets/images/user/1.jpg')}}" class="img-fluid rounded-circle"
-                                            alt="user">
+                                         <img src="{{ Auth::check() && Auth::guard('employee')->user()->pic ? asset(Auth::guard('employee')->user()->pic) : asset('/images/download.png') }}" class="img-fluid rounded-circle">
+
+
                                         <div class="caption ml-3">
-                                            <h6 class="mb-0 line-height">Savannah Nguyen<i
+                                            <h6 class="mb-0 line-height">{{Auth::guard('employee')->user()->name }}<i
                                                     class="las la-angle-down ml-2"></i></h6>
                                         </div>
                                     </a>
@@ -451,7 +442,7 @@
             </div>
         </div>
     </div>
-  
+
     <div class="modal fade bd-example-modal-lg" role="dialog" aria-modal="true" id="new-create-modal">
         <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">

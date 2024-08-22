@@ -104,7 +104,7 @@
                     />
                 </div>
                 <div class="mb-3">
-                    <label for=""  class="form-label">Select Schedule</label>
+                    <label for=""  class="form-label">Select office shifts</label>
                     <select class="form-select form-select-lg" name="schedule_id">
                         <option value="" selected>Select</option>
                         @foreach ($schedules as $schedule)

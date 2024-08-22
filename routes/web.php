@@ -1,3 +1,4 @@
+
 <?php
 
 use App\Http\Controllers\Admin\Attendance\AttendanceController;
@@ -21,7 +22,10 @@ use App\Http\Controllers\Admin\TicketController as adminTicketController;
 use App\Http\Controllers\Employee\indexController as EmployeeIndexController;
 use App\Http\Controllers\Employee\Project\IndexController as ProjectIndexController;
 use App\Http\Controllers\Admin\Employee\indexController as AdminEmployeeIndexController;
+use App\Http\Controllers\Admin\MilestoneController;
 use App\Http\Controllers\Employee\Client\IndexController as EmployeeClientindexController;
+use App\Http\Controllers\UsersAttendanceController;
+use App\Models\UsersAttendance;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +47,11 @@ Route::fallback(function () {
 Route::get('/', function () {
     return redirect()->route('user.login');
 });
+Route::get('admin/forget-password', function () {
+    return view('admin.user.account.forget_password');
+})->middleware('redirectIfAuthenticated')->name('admin.forget_password');
 
+Route::get('/change-password', [UserController::class, 'changePassword'])->name('change.password');
 
 // Role Crud
 Route::prefix('admin')->middleware(['role:super-admin|admin'])->name('admin.')->group(function () {
@@ -60,6 +68,13 @@ Route::prefix('admin')->middleware(['role:super-admin|admin'])->name('admin.')->
         return view('admin.position.create');
     })->name('position.create');
 
+    Route::prefix('user/attendance')->controller(UsersAttendanceController::class)->name('UsersAttendance.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('checkin', 'checkin')->name('checkin');
+        Route::post('checkout', 'checkout')->name('checkout');
+        Route::get('show/{id}', 'show')->name('show');
+        Route::get('list', 'list')->name('list');
+    });
 
     //////Roles Routes
     Route::prefix('roles')->name('roles.')->controller(RolesController::class)->group(function () {
@@ -105,7 +120,8 @@ Route::prefix('admin')->middleware(['role:super-admin|admin'])->name('admin.')->
 
 
     Route::controller(UserController::class)->group(function () {
-        // Route::get('roles/', 'roleIndex')->name('role.index');
+        Route::get('profile/', 'profileEdit')->name('profileEdit');
+        Route::post('profile/update/', 'profile_update')->name('profile.update');
         // Route::get('roles/destory/{id}', 'roleDestory')->name('role.destory');
         // Route::get('roles/edit/{id}', 'roleEdit')->name('role.edit');
         // Route::post('roles/store', 'roleStore')->name('role.store');
@@ -181,6 +197,15 @@ Route::prefix('admin')->middleware(['role:super-admin|admin'])->name('admin.')->
         Route::post('update', 'update')->name('update');
     });
 
+        Route::name('milestone.')->controller(MilestoneController::class)->group(function () {
+            Route::get('{id}/milestone', 'index')->name('index');
+            Route::get('create/{id}/milestone', 'create')->name('create'); // Changed to GET
+            Route::post('store', 'store')->name('store');
+            Route::get('edit/{id}/milestone', 'edit')->name('edit');
+            Route::post('update/milestone', 'update')->name('update');
+            Route::post('destroy/{id}', 'destroy')->name('destroy');
+        });
+
     Route::prefix('user')->name('user.')->group(function () {
         Route::controller(UserController::class)->group(function () {
             Route::get('/', 'index')->name('index');
@@ -197,13 +222,18 @@ Route::prefix('admin')->middleware(['role:super-admin|admin'])->name('admin.')->
 ///Route for user
 Route::prefix('admin')->name('user.')->group(function () {
     Route::controller(UserController::class)->group(function () {
-        Route::get('login', 'login')->name('login')->middleware('redirectIfAuthenticated');
-        Route::post('authenticate', 'authenticate')->name('authenticate');
+        Route::get('login', 'login')->name('login');
+        Route::post('authenticate', 'authenticate')->name('authenticate')->middleware('redirectIfAuthenticated');
+        Route::post('processForgetPassword', 'processForgetPassword')->name('processForgetPassword')->middleware('redirectIfAuthenticated');
         Route::get('logout', 'logout')->name('logout');
+        Route::get('auth-confirm', 'authConfirm')->name('authConfirm')->middleware('redirectIfAuthenticated');
+        Route::get('/resetPassword/{token}', 'resetPasswordForm')->name('resetPasswordForm')->middleware('redirectIfAuthenticated');
+        Route::post('/processResetPassword', 'processResetPassword')->name('processResetPassword')->middleware('redirectIfAuthenticated');
     });
 });
 
 
+// Route::prefix('employee')->middleware(['isEmployee', 'officeWifi'])->name('employee.')->group(function () {
 Route::prefix('employee')->middleware(['isEmployee', 'officeWifi'])->name('employee.')->group(function () {
 
     Route::prefix('ticket')->name('ticket.')->group(function () {
@@ -253,7 +283,7 @@ Route::prefix('employee')->middleware(['isEmployee', 'officeWifi'])->name('emplo
 Route::prefix('employee')->name('employee.')->group(function () {
     Route::controller(EmployeeIndexController::class)->group(function () {
         Route::get('login', 'login')->name('login')->middleware('RedirectIfEmployeeAuthenticated');
-            Route::post('authenticate', 'authenticate')->name('authenticate');
+        Route::post('authenticate', 'authenticate')->name('authenticate');
     });
 });
 

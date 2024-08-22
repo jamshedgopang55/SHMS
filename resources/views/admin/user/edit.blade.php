@@ -1,112 +1,100 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <title>Title</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        <!-- Bootstrap CSS v5.2.1 -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous"
-        />
-         <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
-  
-    </head>
-
-    <body style="display: grid;place-items:center;">
-        
-
-        <div>
-            <h1 class="my-4">user Edit</h1>
-
-            <form style="max-width:700px" class="border p-5" method="post"  action="{{ route('admin.user.update')}}" enctype="multipart/form-data" >
-                @csrf
-                <input type="text" name="id" value="{{$user->id}}" id="">
-                <div class="mb-3">
-                    <label for="" class="form-label">User Name</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        name="name"
-                        value="{{$user->name}}"             
-                    />
-                </div>
-                <div class="mb-3">
-                    <label for="" class="form-label">User Email</label>
-                    <input
-                        type="Email"
-                        class="form-control"
-                        name="email"            
-                        value="{{$user->email}}"        
-                    />
-                </div>
-             
-                
-              
-                <div class="mb-3">
-                    <label for="" class="form-label">User phone</label>
-                    <input
-                        type="phone"
-                        class="form-control"
-                        name="phone"        
-                        value="{{$user->phone}}"            
-                    />
-                </div>
-
-
-                <div  class="form-group col-md-6">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" class="form-control" id="name">
-                </div>
-
-               
-                <div class="mb-3">
-                    <div class="mb-3">
-                        <label for="">Roles</label>
-                        <select name="roles[]" class="form-control" multiple>
-                            @foreach ($roles as $role)
-                            <option
-                                value="{{ $role }}"
-                                {{ in_array($role, $userRoles) ? 'selected':'' }}
-                            >
-                                {{ $role }}
-                            </option>
-                            @endforeach
-                        </select>
-                        @error('roles') <span class="text-danger">{{ $message }}</span> @enderror
+@extends('admin.layout.app')
+@section('content')
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between breadcrumb-content">
+                        <h5>Edit Admin</h5>
+                        <div class="d-flex align-items-center">
+                            <div class="pl-3 border-left btn-new">
+                                <a href="{{ route('admin.user.index') }}" class="btn btn-primary">Back</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-               
-               
-
-
-                <img src="{{ asset($user->pic) }}" alt="Profile Picture" style="max-width: 100px; max-height: 100px;">
-                <input type="file" name="image">
-
-                <div class="mb-3">
-                    <input
-                        type="submit"
-                        class="form-control"
-                        value="update user"               
-                    />
-                </div>
-
-               
-                
-
-            </form>
-
+            </div>
         </div>
+    </div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <!-- Bootstrap JavaScript Libraries -->
+    <div class="row">
+        <div class="col-sm-12 col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" action="{{ route('admin.user.update') }}" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $user->id }}">
 
-    </body>
-</html>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="name">Name</label>
+                                <input type="text" name="name" class="form-control" id="name"
+                                    value="{{ $user->name }}">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" class="form-control" id="email"
+                                    value="{{ $user->email }}">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" class="form-control" id="password">
+                                <small class="form-text text-muted">Leave blank if you don't want to change the
+                                    password.</small>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="phone">Phone</label>
+                                <input type="number" name="phone" class="form-control" id="phone"
+                                    value="{{ $user->phone }}">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="roles">Roles</label>
+                                <select name="roles[]" class="form-control" multiple>
+                                    @php
+                                        $userRoles = $user->roles->pluck('name')->toArray(); // Convert roles to array of names
+                                    @endphp
+                                    @foreach ($roles as $role)
+                                        <option value="{{ $role }}"
+                                            @if (in_array($role, $userRoles)) selected @endif>{{ $role }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="schedules">Schedules</label>
+                                <select name="schedules" class="form-control">
+                                    @foreach ($schedules as $schedule)
+                                        <option value="{{ $schedule->id }}"
+                                            @if ($schedule->id == $user->schedule_id) selected @endif>{{ $schedule->title }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Upload</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" name="image" class="custom-file-input"
+                                            id="inputGroupFile01">
+                                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col mt-3">
+                                <button type="submit" class="btn btn-primary p-2">Update Admin</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

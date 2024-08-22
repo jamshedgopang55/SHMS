@@ -34,8 +34,8 @@
                                 </div>
                             </div>
                             <div class="pl-3 border-left btn-new">
-                                <a href="#" class="btn btn-primary" data-target="#new-user-modal"
-                                    data-toggle="modal">New Clients</a>
+                                <a href="{{route('employee.client.create')}}" class="btn btn-primary" 
+                                    >Crearte Client</a>
                             </div>
                         </div>
                     </div>
@@ -43,8 +43,7 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid">
-        <div class="row">
+    <div class="row">
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
@@ -107,7 +106,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 @endsection
 

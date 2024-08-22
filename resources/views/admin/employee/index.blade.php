@@ -56,9 +56,9 @@
                                         <td><img src="{{ asset($Employee->pic) }}" alt="Profile Picture"
                                                 style="max-width: 100px; max-height: 100px;"></td>
 
-                                                <td><a href="{{route('admin.attendance.show',$Employee->id)}}">Attendace</a></td>
+                                        <td><a href="{{ route('admin.attendance.show', $Employee->id) }}">Attendace</a></td>
                                         <td>
-                                          
+
                                             <a href="{{ url('admin/Employee/edit', $Employee->id) }}" class="edit-icon"><i
                                                     class="fa-solid fa-pen-to-square"></i></a>
                                             <a href="{{ url('admin/Employee/destory', $Employee->id) }}"
@@ -150,17 +150,17 @@
                             </div>
 
 
-                           
+
                             <div class="col-lg-6">
                                 <div class="form-group mb-3">
-                                    <label for="schedule_id" class="h5">schedule</label>
+                                    <label for="schedule_id" class="h5">Shift</label>
                                     <select id="schedule_id" class="selectpicker form-control" name="schedule_id"
                                         data-style="py-0">
-                                        <option>Please Select Department</option>
+                                        <option>Please Select Shift</option>
                                         @foreach ($schedules as $schedule)
-                                        <option value="{{ $schedule->id }}">{{ $schedule->title }} - {{ $schedule->start_datetime }} to {{ $schedule->end_datetime }}</option>
-
-                                    @endforeach
+                                            <option value="{{ $schedule->id }}">{{ $schedule->title }} -
+                                                {{ $schedule->start_datetime }} to {{ $schedule->end_datetime }}</option>
+                                        @endforeach
 
                                     </select>
                                 </div>

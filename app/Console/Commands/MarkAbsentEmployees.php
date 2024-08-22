@@ -56,6 +56,26 @@ class MarkAbsentEmployees extends Command
             }
         }
 
+
+        $employees = user::all();
+
+        // Check attendance for each employee
+        foreach ($employees as $employee) {
+            // Check if the employee has attendance for today
+            $attendance = Attendance::where('uid', $employee->id)
+                ->whereDate('date', $today)
+                ->first();
+
+            // If no attendance record exists, mark the employee as absent
+            if (!$attendance) {
+                $absentAttendance = new Attendance();
+                $absentAttendance->uid = $employee->id;
+                $absentAttendance->date = $today;
+                $absentAttendance->attendance_status = 'absent';
+                $absentAttendance->save();
+            }
+        }
+
         $this->info('Absent employees marked successfully.');
     }
 }
